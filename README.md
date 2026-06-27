@@ -38,17 +38,23 @@ agy --version
 
 ## 🛠️ Scripts de este repo (wrappers con persistencia de PATH)
 
-Los scripts envuelven al instalador oficial (heredando su checksum e idempotencia) y
-añaden lo único que el oficial no hace: **persistir el PATH** y verificar el resultado.
+Los scripts envuelven al instalador oficial (heredando su checksum e idempotencia) y añaden lo único que el oficial no hace: **persistir el PATH**, instalar dependencias y verificar el resultado.
 
 | Script | Plataforma | Qué hace |
 |---|---|---|
 | `scripts/install_antigravity.sh` | Linux / macOS | Instala `agy` + persiste `~/.local/bin` en el PATH |
 | `scripts/install_antigravity.ps1` | Windows | Instala `agy.exe` + persiste el PATH de usuario |
-| `scripts/install_skills.sh` | Linux / macOS | **Opcional**: Node (NVM) para el catálogo de skills |
+| `scripts/install_macos_brew.sh` | macOS | **Completo**: Instala Homebrew + Node@20 + CLIs de IA (Gemini, Claude, Qwen, Codex) + `agy` |
+| `scripts/install_skills.sh` | Linux / macOS | **Opcional**: Instala Node (NVM) para el catálogo de skills en Linux |
 
 ```bash
-# Linux / macOS
+# macOS (Instalación Completa con Homebrew y CLIs de IA)
+chmod +x scripts/install_macos_brew.sh
+./scripts/install_macos_brew.sh
+```
+
+```bash
+# Linux / macOS (Instalación básica de solo agy)
 chmod +x scripts/install_antigravity.sh
 ./scripts/install_antigravity.sh
 ```
