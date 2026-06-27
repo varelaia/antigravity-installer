@@ -1,0 +1,105 @@
+site_name: Antigravity CLI — Guía de Instalación
+site_description: >-
+  Cómo instalar Antigravity CLI (el comando agy de Google) en Linux, macOS y Windows:
+  guía paso a paso, scripts, manuales técnico/operativo/usuario y solución de problemas.
+site_url: https://varelaia.github.io/antigravity-installer/
+site_author: Irving Varela
+copyright: >-
+  Hecho por <a href="https://www.varelainsights.com">Varela Insights</a> · Licencia MIT ·
+  Antigravity y agy son marcas de Google; este es un proyecto comunitario no afiliado.
+
+repo_url: https://github.com/varelaia/antigravity-installer
+repo_name: varelaia/antigravity-installer
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: es
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Cambiar a modo oscuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Cambiar a modo claro
+  features:
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+
+plugins:
+  - search:
+      lang: [es, en]
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: es
+          default: true
+          name: Español
+          build: true
+        - locale: en
+          name: English
+          build: true
+          nav_translations:
+            Inicio: Home
+            Instalación: Installation
+            Skills (opcional): Skills (optional)
+            Preguntas frecuentes: FAQ
+            Solución de problemas: Troubleshooting
+            Manuales: Manuals
+            Manual técnico: Technical manual
+            Manual operativo: Operations manual
+            Manual de usuario: User manual
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/varelaia/antigravity-installer
+    - icon: fontawesome/solid/globe
+      link: https://www.varelainsights.com
+
+nav:
+  - Inicio: es/index.md
+  - Instalación:
+      - Linux: es/linux.md
+      - macOS: es/macos.md
+      - Windows: es/windows.md
+  - Skills (opcional): es/skills.md
+  - Preguntas frecuentes: es/faq.md
+  - Solución de problemas: es/troubleshooting.md
+  - Manuales:
+      - Manual técnico: es/manuales/tecnico.md
+      - Manual operativo: es/manuales/operativo.md
+      - Manual de usuario: es/manuales/usuario.md

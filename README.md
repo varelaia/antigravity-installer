@@ -1,64 +1,93 @@
-# Antigravity (AGY) Installer & Environment Setup
+# Antigravity CLI (`agy`) — Instalador y Guía Completa
 
-Guía rápida y scripts automatizados para instalar de forma correcta y segura **Node.js**, **npm** y la interfaz de terminal de **Antigravity (agy CLI)** en **Linux**, **macOS** y **Windows** sin requerir permisos de administrador (`sudo`/`admin`).
+> **📖 Documentación completa (sitio): https://varelaia.github.io/antigravity-installer/**
 
----
+Guía paso a paso, scripts y manuales para instalar **Antigravity CLI** — el comando
+`agy` de Google — en **Linux**, **macOS** y **Windows**, sin permisos de administrador.
 
-## 📋 Requisitos Previos por Sistema Operativo
-
-*   **Linux / WSL (Windows Subsystem for Linux)**:
-    *   Tener `curl`, `git` y `bash` instalados:
-        ```bash
-        sudo apt update && sudo apt install -y curl git
-        ```
-*   **macOS**:
-    *   Tener instalado Xcode Command Line Tools:
-        ```bash
-        xcode-select --install
-        ```
-*   **Windows (Nativo)**:
-    *   PowerShell 5.1 o superior y habilitada la directiva de ejecución local temporal.
+Antigravity CLI es un **binario nativo en Go**: se descarga de forma directa, **no usa
+Node.js ni npm**, verifica su propio checksum SHA512 y se auto-actualiza. Node solo hace
+falta para el catálogo *opcional* de skills ([ver por qué](https://varelaia.github.io/antigravity-installer/es/faq/)).
 
 ---
 
-## 🛠️ Instalación en Linux & macOS
+## ⚡ Instalación rápida (one-liner oficial)
 
-Ambos sistemas utilizan gestores de entorno locales en el espacio del usuario para evitar conflictos de permisos globales.
+=== "Linux / macOS"
 
-### Paso 1: Instalar Node.js y npm (via NVM)
-Para instalar NVM (Node Version Manager) y Node.js en su versión estable de soporte a largo plazo (LTS):
+    ```bash
+    curl -fsSL https://antigravity.google/cli/install.sh | bash
+    ```
+
+=== "Windows (PowerShell)"
+
+    ```powershell
+    irm https://antigravity.google/cli/install.ps1 | iex
+    ```
+
+Tras instalar, abre una terminal nueva y verifica:
+
 ```bash
-chmod +x install_node_npm.sh
-./install_node_npm.sh
+agy --version
 ```
 
-### Paso 2: Instalar Antigravity CLI
-Una vez que cuentas con Node y npm instalados, corre el instalador de `agy`:
-```bash
-chmod +x install_antigravity.sh
-./install_antigravity.sh
-```
-*Nota: El script detectará dinámicamente si utilizas `bash` o `zsh` en macOS y cargará el PATH en el archivo de perfil correspondiente (`.bashrc` o `.zshrc`). Si el comando `agy` no responde inmediatamente, reinicia tu terminal o ejecuta `source ~/.bashrc` (o `source ~/.zshrc`).*
+> En Linux/macOS quizá necesites añadir `~/.local/bin` al PATH. Nuestros scripts lo hacen
+> por ti de forma idempotente.
 
 ---
 
-## 🛠️ Instalación en Windows (Nativo)
+## 🛠️ Scripts de este repo (wrappers con persistencia de PATH)
 
-En Windows nativo utilizamos **FNM (Fast Node Manager)** para una instalación fluida y con excelente rendimiento sobre PowerShell.
+Los scripts envuelven al instalador oficial (heredando su checksum e idempotencia) y
+añaden lo único que el oficial no hace: **persistir el PATH** y verificar el resultado.
 
-### Paso 1: Ejecutar el Script de PowerShell
-Abre tu terminal de **PowerShell** (no requiere ejecutarse como Administrador) y ejecuta:
+| Script | Plataforma | Qué hace |
+|---|---|---|
+| `scripts/install_antigravity.sh` | Linux / macOS | Instala `agy` + persiste `~/.local/bin` en el PATH |
+| `scripts/install_antigravity.ps1` | Windows | Instala `agy.exe` + persiste el PATH de usuario |
+| `scripts/install_skills.sh` | Linux / macOS | **Opcional**: Node (NVM) para el catálogo de skills |
+
+```bash
+# Linux / macOS
+chmod +x scripts/install_antigravity.sh
+./scripts/install_antigravity.sh
+```
+
 ```powershell
+# Windows (PowerShell, sin admin)
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
-./install_windows.ps1
+./scripts/install_antigravity.ps1
 ```
-
-*El script se encargará de instalar FNM via Winget, configurar las variables de entorno de tu perfil de PowerShell, instalar Node.js LTS e inicializar la descarga de Antigravity CLI.*
 
 ---
 
-## ⚙️ Inicialización de Personalizaciones (Skills & Rules)
-Antigravity detecta automáticamente tus configuraciones y perfiles de agentes en las siguientes ubicaciones de tu usuario:
-* **Reglas globales y Skills**: `~/.gemini/config/skills/` y `~/.gemini/config/AGENTS.md`
-* **Reglas del Proyecto (Workspace)**: `.agents/skills/` y `.agents/AGENTS.md`
+## 📚 Contenido del sitio
 
+- **Instalación** detallada por SO ([Linux](https://varelaia.github.io/antigravity-installer/es/linux/) · [macOS](https://varelaia.github.io/antigravity-installer/es/macos/) · [Windows](https://varelaia.github.io/antigravity-installer/es/windows/))
+- **[Skills (opcional)](https://varelaia.github.io/antigravity-installer/es/skills/)** — el catálogo comunitario vía `npx`
+- **[Preguntas frecuentes](https://varelaia.github.io/antigravity-installer/es/faq/)** — ¿por qué no npm?, ¿dónde queda el binario?, auth
+- **[Solución de problemas](https://varelaia.github.io/antigravity-installer/es/troubleshooting/)** — `command not found`, PATH, permisos, musl, checksum
+- **Manuales**: [Técnico](https://varelaia.github.io/antigravity-installer/es/manuales/tecnico/) · [Operativo](https://varelaia.github.io/antigravity-installer/es/manuales/operativo/) · [Usuario](https://varelaia.github.io/antigravity-installer/es/manuales/usuario/)
+
+Disponible en **español** e **inglés** (selector de idioma en el sitio).
+
+---
+
+## 🧰 Desarrollo del sitio (local)
+
+```bash
+pip install -r requirements.txt
+mkdocs serve            # http://127.0.0.1:8000
+mkdocs build --strict   # valida que todo compila
+```
+
+El sitio se publica solo a GitHub Pages en cada push a `main`
+(`.github/workflows/deploy.yml`).
+
+---
+
+## Licencia
+
+[MIT](LICENSE) © 2026 Irving Varela / Varela Insights.
+Antigravity, `agy` y Gemini son marcas de Google LLC; este es un proyecto comunitario,
+**no afiliado a Google**.

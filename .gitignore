@@ -20,3 +20,9 @@ npm-debug.log*
 .vscode/
 .idea/
 .DS_Store
+
+# MkDocs (sitio generado y entornos virtuales)
+site/
+.venv/
+venv/
+mkdocs-venv/

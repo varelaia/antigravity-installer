@@ -1,0 +1,94 @@
+---
+title: Antigravity CLI (agy) troubleshooting
+description: Common errors when installing Antigravity CLI and how to resolve them: agy command not found, PATH, permissions, checksum, macOS quarantine, musl.
+---
+
+# Troubleshooting
+
+## `agy: command not found` / `agy not recognized`
+
+The binary was installed but it's not on your `PATH`, or the terminal hasn't reloaded the
+profile yet.
+
+=== "Linux / macOS"
+
+    ```bash
+    # 1) Confirm the binary exists:
+    ls -l ~/.local/bin/agy
+    # 2) Add to PATH and reload:
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc   # or ~/.zshrc
+    source ~/.bashrc                                            # or ~/.zshrc
+    ```
+
+=== "Windows"
+
+    Open a **new** terminal (the PATH doesn't update in the current session). If it's still
+    not recognized, check that `%LOCALAPPDATA%\agy\bin` is on the user PATH
+    ([see Windows](windows.md)).
+
+!!! info "Why it happens"
+    A script cannot change the `PATH` of the terminal that invoked it. You always need
+    a **new terminal** or `source` after installing.
+
+## `agy --version` prints nothing
+
+Almost always the same PATH problem: you're invoking an `agy` that doesn't exist in this
+session. Try with the absolute path:
+
+```bash
+~/.local/bin/agy --version
+```
+
+If it does print with the absolute path, it's PATH (see above).
+
+## `Write Error: Permission denied`
+
+The installer couldn't write to `~/.local/bin`. Install in another directory:
+
+```bash
+curl -fsSL https://antigravity.google/cli/install.sh | bash -s -- --dir "$HOME/bin"
+```
+
+Remember to add that directory to your `PATH`.
+
+## `Security Halt: checksum does not match`
+
+The installer detected that the downloaded file doesn't match the expected SHA512
+checksum. **Don't ignore it.** Retry (it may have been a corrupt download); if it persists,
+check your network/proxy/firewall or a possible server-side problem.
+
+## macOS: "Apple cannot check it for malicious software"
+
+Remove Gatekeeper quarantine:
+
+```bash
+xattr -d com.apple.quarantine ~/.local/bin/agy
+```
+
+## `Either curl or wget is required`
+
+Install one of the two:
+
+```bash
+sudo apt install -y curl     # Debian/Ubuntu
+sudo dnf install -y curl     # Fedora
+```
+
+## "Already installed" but I want to reinstall
+
+The installer is idempotent. To force a clean install, delete the binary first:
+
+```bash
+rm ~/.local/bin/agy                       # Linux/macOS
+Remove-Item "$env:LOCALAPPDATA\agy\bin\agy.exe" -Force   # Windows (PowerShell)
+```
+
+## Linux musl / Alpine: the binary won't run
+
+The official installer detects musl automatically. If you downloaded it by hand, make sure
+to use the `linux_<arch>_musl` variant. More detail in the [Technical manual](manuales/tecnico.md).
+
+---
+
+Your case isn't here? Open an *issue* on
+[GitHub](https://github.com/varelaia/antigravity-installer/issues).
