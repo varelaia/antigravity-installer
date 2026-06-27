@@ -9,7 +9,7 @@ mkdir -p "$HOME/.local/bin"
 
 # 2. Descarga del instalador oficial
 echo "Descargando instalador..."
-curl -sSL https://antigravity.googleapis.com/install.sh | bash
+curl -fsSL https://antigravity.google/cli/install.sh | bash
 
 # 3. Exportar ruta al PATH de bash si no está presente
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
