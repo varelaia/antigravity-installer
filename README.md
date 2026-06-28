@@ -11,6 +11,17 @@ falta para el catálogo *opcional* de skills ([ver por qué](https://varelaia.gi
 
 ---
 
+## 🎯 Propósito y Objetivos del Proyecto
+
+El desarrollo y despliegue de agentes autónomos en entornos locales presenta tres fricciones críticas que este repositorio resuelve bajo una filosofía de **resiliencia y seguridad**:
+
+1. **Aislamiento sin privilegios de Administrador**: Evitar la corrupción de permisos del sistema. Los instaladores tradicionales obligan al uso de `sudo npm install -g` en macOS/Linux, alterando la propiedad del sistema de archivos. Este instalador aísla todo al directorio `$HOME` utilizando NVM/FNM y un prefijo global local en espacio de usuario.
+2. **Seguridad Preventiva de Secretos (Zero-Trust)**: El desarrollo de automatizaciones con IAs requiere API Keys y credenciales de bases de datos. Este repositorio implementa una configuración defensiva y reglas estrictas en `.gitignore` para bloquear de forma preventiva cualquier fuga de llaves hacia repositorios públicos.
+3. **Estandarización de Entornos**: Homologar el comportamiento de ejecución de los agentes locales para que repliquen fielmente el arsenal y variables de la flota de producción, reduciendo el tiempo de onboarding y configuración de días a un solo comando.
+
+---
+
+
 ## ⚡ Instalación rápida (one-liner oficial)
 
 === "Linux / macOS"
