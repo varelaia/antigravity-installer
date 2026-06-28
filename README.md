@@ -42,25 +42,25 @@ Si deseas instalar el entorno sin tener que clonar este repositorio, puedes copi
 
 ### 1. macOS (Completo: Homebrew + Node 20 + CLIs de IA + Antigravity)
 *Instala Homebrew, Node v20, configura `npm-global` sin `sudo`, instala en lote las CLIs de **Gemini, Claude, Qwen, Codex** y configura `agy`:*
-```bash
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_macos_brew.sh)"
 ```
 
 ### 2. Linux / WSL (Completo: NVM + Node LTS + Antigravity)
 *Instala NVM, la versión LTS estable de Node.js y npm, y configura la CLI de Antigravity:*
-```bash
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_skills.sh)"
 ```
 
 ### 3. Linux / WSL (Básico: Solo Antigravity CLI)
 *Instala el binario nativo de la CLI de Antigravity y configura persistentemente el PATH:*
-```bash
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_antigravity.sh)"
 ```
 
 ### 4. Windows Nativo (PowerShell sin privilegios de Administrador)
 *Descarga e inicializa el instalador de PowerShell que configura FNM, Node.js y Antigravity:*
-```powershell
+```
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_antigravity.ps1 | iex
 ```
 
