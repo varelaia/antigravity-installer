@@ -45,6 +45,8 @@ Si deseas instalar el entorno sin tener que clonar este repositorio, puedes copi
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_macos_brew.sh)"
 ```
+*⚠️ **Importante**: Al finalizar la instalación, debes reiniciar tu terminal o ejecutar en la misma consola el comando:* `source ~/.zshrc`
+
 
 ### 2. Linux / WSL (Completo: NVM + Node LTS + Antigravity)
 *Instala NVM, la versión LTS estable de Node.js y npm, y configura la CLI de Antigravity:*
