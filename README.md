@@ -145,6 +145,14 @@ Disponible en **español** e **inglés** (selector de idioma en el sitio).
 
 ---
 
+## ⚙️ Inicialización de Personalizaciones (Skills & Rules)
+
+Antigravity detecta automáticamente tus configuraciones y perfiles de agentes en las siguientes ubicaciones de tu usuario:
+* **Reglas globales y Skills**: `~/.gemini/config/skills/` y `~/.gemini/config/AGENTS.md`
+* **Reglas del Proyecto (Workspace)**: `.agents/skills/` y `.agents/AGENTS.md`
+
+---
+
 ## 🧰 Desarrollo del sitio (local)
 
 ```bash
