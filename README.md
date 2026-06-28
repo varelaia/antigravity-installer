@@ -36,6 +36,36 @@ agy --version
 
 ---
 
+## ⚡ Instalación Directa One-Liners (Sin Clonar el Repo)
+
+Si deseas instalar el entorno sin tener que clonar este repositorio, puedes copiar y ejecutar directamente los siguientes comandos consolidados en tu terminal:
+
+### 1. macOS (Completo: Homebrew + Node 20 + CLIs de IA + Antigravity)
+*Instala Homebrew, Node v20, configura `npm-global` sin necesidad de privilegios `sudo`, instala en lote las CLIs de **Gemini, Claude, Qwen, Codex** y configura Antigravity:*
+```bash
+curl -fsSL "https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_macos_brew.sh" -o install_macos_brew.sh && chmod +x install_macos_brew.sh && ./install_macos_brew.sh && rm install_macos_brew.sh
+```
+
+### 2. Linux / WSL (Completo: NVM + Node LTS + Antigravity)
+*Instala NVM, la versión LTS estable de Node.js y npm, y configura la CLI de Antigravity:*
+```bash
+curl -fsSL "https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_skills.sh" -o install_skills.sh && chmod +x install_skills.sh && ./install_skills.sh && rm install_skills.sh
+```
+
+### 3. Linux / WSL (Básico: Solo Antigravity CLI)
+*Instala el binario nativo de la CLI de Antigravity y configura persistentemente el PATH:*
+```bash
+curl -fsSL "https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_antigravity.sh" -o install_antigravity.sh && chmod +x install_antigravity.sh && ./install_antigravity.sh && rm install_antigravity.sh
+```
+
+### 4. Windows Nativo (PowerShell sin privilegios de Administrador)
+*Descarga e inicializa el instalador de PowerShell que configura FNM, Node.js y Antigravity:*
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_antigravity.ps1" -OutFile install_antigravity.ps1; .\install_antigravity.ps1; Remove-Item install_antigravity.ps1
+```
+
+---
+
 ## 🛠️ Scripts de este repo (wrappers con persistencia de PATH)
 
 Los scripts envuelven al instalador oficial (heredando su checksum e idempotencia) y añaden lo único que el oficial no hace: **persistir el PATH**, instalar dependencias y verificar el resultado.
