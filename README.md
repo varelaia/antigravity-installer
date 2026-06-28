@@ -38,33 +38,56 @@ agy --version
 
 ## ⚡ Instalación Directa One-Liners (Sin Clonar el Repo)
 
-Si deseas instalar el entorno sin tener que clonar este repositorio, puedes copiar y ejecutar directamente los siguientes comandos simplificados en tu terminal:
+Si deseas instalar el entorno sin tener que clonar este repositorio, puedes copiar y ejecutar directamente los siguientes comandos simplificados en tu terminal según tu sistema operativo:
 
 ### 1. macOS (Completo: Homebrew + Node 20 + CLIs de IA + Antigravity)
 *Instala Homebrew, Node v20, configura `npm-global` sin `sudo`, instala en lote las CLIs de **Gemini, Claude, Qwen, Codex** y configura `agy`:*
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_macos_brew.sh)"
 ```
-*⚠️ **Importante**: Al finalizar la instalación, debes reiniciar tu terminal o ejecutar en la misma consola el comando:* `source ~/.zshrc`
-
+*⚠️ **Importante**: Al finalizar la instalación, debes reiniciar tu terminal o ejecutar en la misma consola:* `source ~/.zshrc`
 
 ### 2. Linux / WSL (Completo: NVM + Node LTS + Antigravity)
 *Instala NVM, la versión LTS estable de Node.js y npm, y configura la CLI de Antigravity:*
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_skills.sh)"
 ```
+*⚠️ **Importante**: Al finalizar la instalación, debes reiniciar tu terminal o ejecutar en la misma consola:* `source ~/.bashrc`
 
 ### 3. Linux / WSL (Básico: Solo Antigravity CLI)
 *Instala el binario nativo de la CLI de Antigravity y configura persistentemente el PATH:*
 ```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_antigravity.sh)"
 ```
+*⚠️ **Importante**: Al finalizar la instalación, debes reiniciar tu terminal o ejecutar en la misma consola:* `source ~/.bashrc`
 
 ### 4. Windows Nativo (PowerShell sin privilegios de Administrador)
 *Descarga e inicializa el instalador de PowerShell que configura FNM, Node.js y Antigravity:*
 ```
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; irm https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_antigravity.ps1 | iex
 ```
+*⚠️ **Importante**: Asegúrate de ejecutar este comando en una consola de **PowerShell** (no CMD). Al finalizar, cierra y vuelve a abrir tu terminal de PowerShell.*
+
+---
+
+## 🔍 Solución Rápida de Problemas (Troubleshooting Headless / SSH)
+
+Si estás instalando en un servidor remoto o VPS (como Mandalore) vía SSH, puedes experimentar los siguientes incidentes:
+
+### El comando `agy` se queda congelado en `Signing in...`
+La CLI de Antigravity intenta abrir un navegador gráfico local para iniciar sesión. Si tu sesión de SSH tiene reenvío de pantalla (`DISPLAY` activo), se congelará intentando comunicarse con un servidor gráfico que no responde.
+*   **Solución**: Desactiva la variable de entorno gráfico en tu consola para forzar el flujo headless de terminal:
+    ```bash
+    unset DISPLAY && agy
+    ```
+    *Copia la URL de verificación mostrada, ábrela en el navegador de tu computadora local y pega de vuelta el código de confirmación en la consola.*
+
+### La sesión me vuelve a pedir Login cada vez que abro otra terminal
+En servidores headless de Linux, no hay un llavero de seguridad activo (`keyring` / `dbus`) en sesiones SSH SSH-non-interactive.
+*   **Solución**: Utiliza una API Key de Google Gemini agregándola al final de tu archivo de configuración de shell (`~/.bashrc`):
+    ```bash
+    export ANTIGRAVITY_API_KEY="tu_api_key_de_gemini"
+    ```
 
 ---
 
