@@ -120,9 +120,9 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 killall Finder 2>/dev/null || true
 
 # 9. Instalar dependencias de Python para manipulación de archivos (Office & Multimedia)
-echo "Instalando dependencias de Python (pandas, openpyxl, reportlab, pypdf, pillow, pydub)..."
+echo "Instalando dependencias de Python (pandas, openpyxl, reportlab, pypdf, pillow, pydub, audioop-lts)..."
 export PATH="$PYTHON_LIBEXEC:$PATH"
-pip3 install --user --break-system-packages pandas openpyxl reportlab pypdf pillow pydub 2>/dev/null || pip install --user --break-system-packages pandas openpyxl reportlab pypdf pillow pydub
+pip3 install --user --break-system-packages pandas openpyxl reportlab pypdf pillow pydub audioop-lts 2>/dev/null || pip install --user --break-system-packages pandas openpyxl reportlab pypdf pillow pydub audioop-lts
 
 echo "=== ✅ Instalación de Entorno macOS Completada ==="
 echo "Por favor ejecuta en tu terminal: source ~/.zshrc"
