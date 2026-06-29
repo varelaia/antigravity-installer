@@ -148,6 +148,7 @@ El instalador de macOS configura de forma nativa soporte para que los desarrolla
 | **`.pdf` (Documentos)** | `reportlab` + `pypdf` | Creación de reportes PDF a partir de texto, extracción de páginas y combinación de archivos. |
 | **`.mp3` / `.wav`** | `ffmpeg` + `pydub` | Compresión, edición, conversión y corte de archivos de audio de forma nativa. |
 | **`.png` / `.jpg`** | `imagemagick` + `pillow` | Edición masiva de imágenes, redimensionamiento, optimización de peso y aplicación de marcas de agua. |
+| **`Video / Audio`** | `yt-dlp` | Descarga de contenido de video y audio desde múltiples plataformas de internet directamente por consola. |
 
 ---
 

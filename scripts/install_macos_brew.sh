@@ -23,7 +23,7 @@ fi
 
 # 2. Instalar suite de desarrollo y productividad (Homebrew)
 echo "Instalando herramientas y dependencias recomendadas..."
-brew install python@3.12 zoxide fzf git-delta btop tldr bat ripgrep fd eza httpie zsh-autosuggestions zsh-syntax-highlighting git node@20 ffmpeg imagemagick
+brew install python@3.12 zoxide fzf git-delta btop tldr bat ripgrep fd eza httpie zsh-autosuggestions zsh-syntax-highlighting git node@20 ffmpeg imagemagick yt-dlp
 
 # 3. Configurar variables de entorno y utilidades en ~/.zshrc
 echo "Configurando perfil ~/.zshrc..."
