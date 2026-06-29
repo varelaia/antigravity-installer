@@ -138,6 +138,17 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 ./scripts/install_antigravity.ps1
 ```
 
+## 🗃️ Automatización y Manipulación de Archivos (Office & Multimedia)
+
+El instalador de macOS configura de forma nativa soporte para que los desarrolladores y sus agentes puedan procesar y editar múltiples formatos de archivos mediante herramientas CLI de alto rendimiento y librerías de Python 3.12:
+
+| Formato | Herramienta / Librería | Capacidad Operativa en Consola |
+| :--- | :--- | :--- |
+| **`.xlsx` (Excel)** | `pandas` + `openpyxl` | Generación y lectura de hojas de cálculo, automatización de bases de datos y reportes estructurados. |
+| **`.pdf` (Documentos)** | `reportlab` + `pypdf` | Creación de reportes PDF a partir de texto, extracción de páginas y combinación de archivos. |
+| **`.mp3` / `.wav`** | `ffmpeg` + `pydub` | Compresión, edición, conversión y corte de archivos de audio de forma nativa. |
+| **`.png` / `.jpg`** | `imagemagick` + `pillow` | Edición masiva de imágenes, redimensionamiento, optimización de peso y aplicación de marcas de agua. |
+
 ---
 
 ## 📚 Contenido del sitio

@@ -23,7 +23,7 @@ fi
 
 # 2. Instalar suite de desarrollo y productividad (Homebrew)
 echo "Instalando herramientas y dependencias recomendadas..."
-brew install python@3.12 zoxide fzf git-delta btop tldr bat ripgrep fd eza httpie zsh-autosuggestions zsh-syntax-highlighting git node@20
+brew install python@3.12 zoxide fzf git-delta btop tldr bat ripgrep fd eza httpie zsh-autosuggestions zsh-syntax-highlighting git node@20 ffmpeg imagemagick
 
 # 3. Configurar variables de entorno y utilidades en ~/.zshrc
 echo "Configurando perfil ~/.zshrc..."
@@ -118,6 +118,11 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 killall Finder 2>/dev/null || true
+
+# 9. Instalar dependencias de Python para manipulación de archivos (Office & Multimedia)
+echo "Instalando dependencias de Python (pandas, openpyxl, reportlab, pypdf, pillow, pydub)..."
+export PATH="$PYTHON_LIBEXEC:$PATH"
+pip3 install --user --break-system-packages pandas openpyxl reportlab pypdf pillow pydub 2>/dev/null || pip install --user --break-system-packages pandas openpyxl reportlab pypdf pillow pydub
 
 echo "=== ✅ Instalación de Entorno macOS Completada ==="
 echo "Por favor ejecuta en tu terminal: source ~/.zshrc"
