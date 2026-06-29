@@ -21,52 +21,103 @@ else
     echo "Homebrew ya está instalado."
 fi
 
-# 2. Instalar Node.js v20 via Homebrew
-echo "Instalando Node.js v20..."
-brew install node@20
+# 2. Instalar suite de desarrollo y productividad (Homebrew)
+echo "Instalando herramientas y dependencias recomendadas..."
+brew install python@3.12 zoxide fzf git-delta btop tldr bat ripgrep fd eza httpie zsh-autosuggestions zsh-syntax-highlighting git node@20
 
-# 3. Configurar variables de entorno de Node en ~/.zshrc
-echo "Configurando PATH para Node@20..."
+# 3. Configurar variables de entorno y utilidades en ~/.zshrc
+echo "Configurando perfil ~/.zshrc..."
+
+# Obtener ruta de Node
 if [ -d "/opt/homebrew/opt/node@20/bin" ]; then
     NODE_PATH="/opt/homebrew/opt/node@20/bin"
+    BREW_SHARE="/opt/homebrew/share"
+    PYTHON_LIBEXEC="/opt/homebrew/opt/python@3.12/libexec/bin"
 else
     NODE_PATH="/usr/local/opt/node@20/bin"
+    BREW_SHARE="/usr/local/share"
+    PYTHON_LIBEXEC="/usr/local/opt/python@3.12/libexec/bin"
 fi
 
-if [[ ":$PATH:" != *":$NODE_PATH:"* ]]; then
-    echo "Añadiendo ruta al PATH en ~/.zshrc..."
+# Asegurarse de que el perfil no duplique las entradas
+touch "$HOME/.zshrc"
+
+# Configurar PATH de Node@20
+if ! grep -q "node@20/bin" "$HOME/.zshrc"; then
     echo "export PATH=\"$NODE_PATH:\$PATH\"" >> "$HOME/.zshrc"
-    export PATH="$NODE_PATH:$PATH"
 fi
 
-# 4. Configurar prefijo global de npm para evitar el uso de 'sudo' (Mejor Práctica de Seguridad)
-# Evita que el comando 'npm install -g' requiera 'sudo' para modificar directorios de sistema
-echo "Configurando directorio global de npm en espacio de usuario..."
+# Configurar PATH de Python 3.12
+if ! grep -q "python@3.12" "$HOME/.zshrc"; then
+    echo "export PATH=\"$PYTHON_LIBEXEC:\$PATH\"" >> "$HOME/.zshrc"
+fi
+
+# Configurar inicialización de zoxide
+if ! grep -q "zoxide init" "$HOME/.zshrc"; then
+    echo 'eval "$(zoxide init zsh)"' >> "$HOME/.zshrc"
+fi
+
+# Configurar inicialización de fzf
+if ! grep -q "fzf --zsh" "$HOME/.zshrc"; then
+    echo 'source <(fzf --zsh)' >> "$HOME/.zshrc"
+fi
+
+# Configurar plugins de Zsh (Autosuggestions & Syntax Highlighting)
+if ! grep -q "zsh-autosuggestions.zsh" "$HOME/.zshrc"; then
+    echo "source $BREW_SHARE/zsh-autosuggestions/zsh-autosuggestions.zsh" >> "$HOME/.zshrc"
+fi
+if ! grep -q "zsh-syntax-highlighting.zsh" "$HOME/.zshrc"; then
+    echo "source $BREW_SHARE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> "$HOME/.zshrc"
+fi
+
+# 4. Configurar prefijo global de npm en espacio de usuario
+echo "Configurando directorio global de npm..."
 mkdir -p "$HOME/.npm-global"
-export PATH="$NODE_PATH:$PATH" # Cargar Node para poder ejecutar npm
+export PATH="$NODE_PATH:$PATH"
 "$NODE_PATH/npm" config set prefix "$HOME/.npm-global"
 
-if [[ ":$PATH:" != *":$HOME/.npm-global/bin:"* ]]; then
+if ! grep -q "npm-global/bin" "$HOME/.zshrc"; then
     echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> "$HOME/.zshrc"
-    export PATH="$HOME/.npm-global/bin:$PATH"
 fi
 
-# 5. Instalar CLIs de IA populares (Gemini, Claude, Qwen, Codex)
-echo "Instalando CLIs de Inteligencia Artificial de forma global..."
+# 5. Instalar CLIs de IA de forma global en npm
+echo "Instalando CLIs de IA de forma global..."
 export PATH="$HOME/.npm-global/bin:$PATH"
 "$NODE_PATH/npm" install -g @google/gemini-cli
 "$NODE_PATH/npm" install -g @anthropic-ai/claude-code
 "$NODE_PATH/npm" install -g @qwen-code/qwen-code
 "$NODE_PATH/npm" install -g @openai/codex
 
-# 6. Descargar e instalar la CLI de Antigravity (agy)
+# 6. Instalar la CLI de Antigravity (agy)
 echo "Instalando Antigravity CLI..."
 mkdir -p "$HOME/.local/bin"
 curl -fsSL https://antigravity.google/cli/install.sh | bash
 
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+if ! grep -q ".local/bin" "$HOME/.zshrc"; then
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.zshrc"
 fi
+
+# 7. Redirección y espacio de trabajo
+echo "Configurando espacio de trabajo ~/Code..."
+mkdir -p "$HOME/Code"
+if [ ! -L "$HOME/Desktop/Code" ]; then
+    ln -s "$HOME/Code" "$HOME/Desktop/Code" 2>/dev/null || true
+fi
+
+if ! grep -q "cd \$HOME/Code" "$HOME/.zshrc" && ! grep -q "cd ~/Code" "$HOME/.zshrc"; then
+    echo "" >> "$HOME/.zshrc"
+    echo "# Abrir siempre en la carpeta de trabajo" >> "$HOME/.zshrc"
+    echo "cd \$HOME/Code" >> "$HOME/.zshrc"
+fi
+
+# 8. Ajustes ocultos del sistema macOS (Defaults)
+echo "Aplicando optimizaciones de sistema macOS (Defaults)..."
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+killall Finder 2>/dev/null || true
 
 echo "=== ✅ Instalación de Entorno macOS Completada ==="
 echo "Por favor ejecuta en tu terminal: source ~/.zshrc"

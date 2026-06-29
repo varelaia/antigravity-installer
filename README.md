@@ -110,13 +110,20 @@ Los scripts envuelven al instalador oficial (heredando su checksum e idempotenci
 |---|---|---|
 | `scripts/install_antigravity.sh` | Linux / macOS | Instala `agy` + persiste `~/.local/bin` en el PATH |
 | `scripts/install_antigravity.ps1` | Windows | Instala `agy.exe` + persiste el PATH de usuario |
-| `scripts/install_macos_brew.sh` | macOS | **Completo**: Instala Homebrew + Node@20 + CLIs de IA (Gemini, Claude, Qwen, Codex) + `agy` |
+| `scripts/install_macos_brew.sh` | macOS | **Completo**: Instala Homebrew + Node@20 + Python 3.12 + Herramientas CLI + Plugins Zsh + CLIs de IA (Gemini, Claude, Qwen, Codex) + `agy` + defaults de macOS |
+| `scripts/optimizar_equipo.sh` | macOS | **Mantenimiento**: Optimizador metodológico de disco y RAM con Premortem Gate en vivo y reporte de gigabytes recuperados |
 | `scripts/install_skills.sh` | Linux / macOS | **Opcional**: Instala Node (NVM) para el catálogo de skills en Linux |
 
 ```bash
-# macOS (Instalación Completa con Homebrew y CLIs de IA)
+# macOS (Instalación Completa de Entorno, Herramientas CLI y Defaults)
 chmod +x scripts/install_macos_brew.sh
 ./scripts/install_macos_brew.sh
+```
+
+```bash
+# macOS (Ejecución de Mantenimiento y Purga Semanal Segura)
+chmod +x scripts/optimizar_equipo.sh
+./scripts/optimizar_equipo.sh
 ```
 
 ```bash
