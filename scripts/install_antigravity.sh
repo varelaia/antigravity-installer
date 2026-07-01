@@ -15,6 +15,26 @@ PATH_LINE='export PATH="$HOME/.local/bin:$PATH"'
 
 say() { printf '%s\n' "$*"; }
 
+# 0) Pre-flight macOS: agy requiere macOS 12.0 (Monterey)+.
+#    En macOS 11 o anterior el binario se instala pero CRASHEA al conectarse
+#    (dyld: Symbol not found: _SecTrustCopyCertificateChain). Avisamos y abortamos
+#    ANTES de instalar, en vez de dejar un agy que no arranca. (Solo aplica a macOS;
+#    en Linux no se evalúa.)
+if [ "$(uname -s)" = "Darwin" ]; then
+    OS_VER="$(sw_vers -productVersion 2>/dev/null || echo 0)"
+    OS_MAJOR="${OS_VER%%.*}"
+    if ! printf '%s' "$OS_MAJOR" | grep -qE '^[0-9]+$' || [ "$OS_MAJOR" -lt 12 ]; then
+        {
+            say "✗ macOS ${OS_VER} NO es compatible con Antigravity CLI (agy)."
+            say "  agy requiere macOS 12.0 (Monterey) o superior."
+            say "  En macOS 11 o anterior se instala pero CRASHEA al conectarse:"
+            say "    dyld: Symbol not found: _SecTrustCopyCertificateChain"
+            say "  Actualiza macOS a 12+ o usa un Mac más nuevo (o Linux/Windows)."
+        } >&2
+        exit 1
+    fi
+fi
+
 # 1) Idempotencia: si ya existe, no reinstalar (el CLI se auto-actualiza en background).
 if command -v agy >/dev/null 2>&1 || [ -x "$BIN_DIR/agy" ]; then
     say "✓ 'agy' ya está instalado ($(command -v agy 2>/dev/null || echo "$BIN_DIR/agy"))."

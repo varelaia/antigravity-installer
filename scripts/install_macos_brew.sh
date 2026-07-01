@@ -4,6 +4,33 @@ set -euo pipefail
 
 echo "=== 🚀 Iniciando Instalación en macOS via Homebrew ==="
 
+# 0. PRE-FLIGHT OBLIGATORIO: versión de macOS (agy requiere 12.0 Monterey+)
+#    agy es un binario built-for-macOS-12: en macOS 11 o anterior se INSTALA pero
+#    CRASHEA al hacer TLS (dyld: Symbol not found: _SecTrustCopyCertificateChain).
+#    Se valida ANTES de instalar Homebrew/paquetes para no gastar GB de descargas
+#    (rust, llvm, ghc…) en un equipo donde agy no va a poder correr.
+MIN_MACOS_MAJOR=12
+OS_VER="$(sw_vers -productVersion 2>/dev/null || echo 0)"
+OS_MAJOR="${OS_VER%%.*}"
+echo "macOS detectado: ${OS_VER}"
+if ! printf '%s' "$OS_MAJOR" | grep -qE '^[0-9]+$' || [ "$OS_MAJOR" -lt "$MIN_MACOS_MAJOR" ]; then
+    {
+        echo ""
+        echo "❌ macOS ${OS_VER} NO es compatible con Antigravity CLI (agy)."
+        echo "   agy requiere macOS ${MIN_MACOS_MAJOR}.0 (Monterey) o superior."
+        echo "   En macOS 11 o anterior, agy se instala pero CRASHEA al conectarse:"
+        echo "     dyld: Symbol not found: _SecTrustCopyCertificateChain"
+        echo ""
+        echo "   Qué hacer:"
+        echo "     • Actualiza macOS a 12+ (Ajustes/Preferencias → Actualización de software)."
+        echo "     • O usa un Mac más nuevo, o Linux/Windows."
+        echo ""
+        echo "   Abortado ANTES de instalar Homebrew/paquetes (para no llenar tu disco"
+        echo "   con software que no vas a poder usar con agy)."
+    } >&2
+    exit 1
+fi
+
 # 1. Instalar Homebrew si no está instalado en el sistema
 if ! command -v brew &> /dev/null; then
     echo "Homebrew no encontrado. Instalando..."

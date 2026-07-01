@@ -58,7 +58,7 @@ agy --version
 | System | Prerequisite |
 |---|---|
 | **Linux / WSL** | `curl` or `wget` (`sudo apt install -y curl`) |
-| **macOS** | Nothing extra; the installer removes quarantine for you |
+| **macOS** | **macOS 12.0 (Monterey)+** (check with `sw_vers`); nothing else — the installer removes quarantine. On macOS 11 or earlier `agy` [crashes](troubleshooting.md). |
 | **Windows 10/11** | PowerShell 5.1+ (no admin required) |
 
 ## Choose your path

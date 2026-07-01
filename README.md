@@ -51,6 +51,14 @@ agy --version
 > `echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc`
 > — más detalle en [Solución de problemas](https://varelaia.github.io/antigravity-installer/es/troubleshooting/).
 
+> [!IMPORTANT]
+> **macOS: requiere macOS 12.0 (Monterey) o superior. Verifícalo SIEMPRE primero con `sw_vers`.**
+> `agy` es un binario compilado para macOS 12+. En **macOS 11 (Big Sur) o anterior** se instala
+> pero **crashea al conectarse** (`dyld: Symbol not found: _SecTrustCopyCertificateChain`) —
+> `agy --version` funciona, pero `agy` "no hace nada". No es PATH ni librerías: es la versión del
+> SO. Actualiza macOS o usa un Mac más nuevo. Los scripts de este repo ahora **abortan solo** si
+> detectan macOS &lt; 12. Detalle: [Solución de problemas](https://varelaia.github.io/antigravity-installer/es/troubleshooting/).
+
 ---
 
 ## ⚡ Instalación Directa One-Liners (Sin Clonar el Repo)

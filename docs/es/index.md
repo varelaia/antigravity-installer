@@ -58,7 +58,7 @@ agy --version
 | Sistema | Requisito previo |
 |---|---|
 | **Linux / WSL** | `curl` o `wget` (`sudo apt install -y curl`) |
-| **macOS** | Nada extra; el instalador quita la cuarentena por ti |
+| **macOS** | **macOS 12.0 (Monterey)+** (verifica con `sw_vers`); nada más — el instalador quita la cuarentena. En macOS 11 o anterior `agy` [crashea](troubleshooting.md). |
 | **Windows 10/11** | PowerShell 5.1+ (no requiere admin) |
 
 ## Elige tu camino

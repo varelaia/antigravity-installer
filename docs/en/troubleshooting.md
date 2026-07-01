@@ -107,6 +107,39 @@ Remove-Item "$env:LOCALAPPDATA\agy\bin\agy.exe" -Force   # Windows (PowerShell)
 The official installer detects musl automatically. If you downloaded it by hand, make sure
 to use the `linux_<arch>_musl` variant. More detail in the [Technical manual](manuales/tecnico.md).
 
+## macOS: `agy --version` works but `agy` "does nothing" (crash on macOS &lt; 12)
+
+Typical symptom: `agy --version` prints the version, but `agy` (or `agy -p "hi"`) **returns
+to the prompt showing nothing** — no output, no visible error. The real error is in the log:
+
+```bash
+tail -40 ~/.gemini/antigravity-cli/cli.log
+```
+
+If you see something like:
+
+```
+dyld: Symbol not found: _SecTrustCopyCertificateChain
+  Referenced from: /Users/<your-user>/.local/bin/agy (which was built for Mac OS X 12.0)
+```
+
+…it's a **macOS version incompatibility**, not a PATH, permissions, or library problem:
+
+- `agy` is built for **macOS 12.0 (Monterey)**. The `_SecTrustCopyCertificateChain` symbol is
+  an API Apple introduced in macOS 12.0.
+- On **macOS 11 (Big Sur) or earlier** that symbol doesn't exist → as soon as `agy` makes an
+  **HTTPS** connection (verifying the TLS certificate) it **crashes** (SIGABRT). That's why
+  `--version` (no network) works, but any real action dies.
+
+**Always check your version first:**
+
+```bash
+sw_vers
+```
+
+**Fix:** it's an OS incompatibility — **no installable library fixes it**. Update macOS to
+**12.0+** (System Settings → Software Update) or use a newer Mac (or Linux / Windows).
+
 ## macOS: allow screen recording for remote assistance (Google Meet)
 
 If you're going to receive remote support over **Google Meet** and need to **share your

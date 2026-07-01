@@ -8,6 +8,18 @@ description: Cómo instalar el comando agy de Google Antigravity en macOS (Intel
 Funciona en **Intel (x86_64)** y **Apple Silicon (arm64)**. No requiere permisos de
 administrador. El shell por defecto en macOS moderno es **zsh**.
 
+!!! danger "Requisito: macOS 12.0 (Monterey) o superior — verifícalo PRIMERO"
+    `agy` es un binario compilado para **macOS 12.0+**. En **macOS 11 (Big Sur) o anterior**
+    se instala pero **crashea al conectarse** (`dyld: Symbol not found: _SecTrustCopyCertificateChain`).
+    **Antes de instalar nada**, comprueba tu versión:
+
+    ```bash
+    sw_vers
+    ```
+
+    Si `ProductVersion` es **menor a 12.0** → `agy` no puede correr en ese Mac. Actualiza macOS
+    (Ajustes → Actualización de software) o usa un Mac más nuevo / Linux / Windows.
+
 ## Opción A — Instalador oficial (1 comando)
 
 ```bash
