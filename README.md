@@ -45,6 +45,12 @@ agy --version
 > En Linux/macOS quizá necesites añadir `~/.local/bin` al PATH. Nuestros scripts lo hacen
 > por ti de forma idempotente.
 
+> [!WARNING]
+> **macOS (zsh):** si tras instalar `agy` dice `command not found`, el instalador oficial
+> pudo escribir el PATH en `~/.bashrc`, que **zsh no lee**. Ponlo en `~/.zshrc`:
+> `echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc`
+> — más detalle en [Solución de problemas](https://varelaia.github.io/antigravity-installer/es/troubleshooting/).
+
 ---
 
 ## ⚡ Instalación Directa One-Liners (Sin Clonar el Repo)

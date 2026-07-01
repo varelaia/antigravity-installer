@@ -43,6 +43,16 @@ Afterwards, open a **new** terminal and check:
 agy --version
 ```
 
+!!! warning "macOS: if it says `agy: command not found`, use `~/.zshrc` (not `~/.bashrc`)"
+    The official installer runs under `bash` and suggests the PATH in `~/.bashrc`, but macOS
+    uses **`zsh`**, which **does not read `~/.bashrc`**. Add it to `~/.zshrc` and reload:
+
+    ```bash
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+    ```
+
+    More detail in [Troubleshooting](troubleshooting.md).
+
 ## What do I need before I start?
 
 | System | Prerequisite |
