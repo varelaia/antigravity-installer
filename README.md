@@ -93,6 +93,13 @@ Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; irm https://r
 ```
 *⚠️ **Importante**: Asegúrate de ejecutar este comando en una consola de **PowerShell** (no CMD). Al finalizar, cierra y vuelve a abrir tu terminal de PowerShell.*
 
+### 5. macOS — AnyDesk para asistencia remota (instala + abre los paneles de permisos)
+*Instala AnyDesk (Homebrew si existe, si no el `.dmg` oficial), lo lanza y **abre** los paneles de Privacidad de **Grabación de pantalla** y **Accesibilidad** para que solo tengas que dar 1 clic por permiso. También sirve para habilitar la **compartición de pantalla de Google Meet**. Funciona en macOS 11+:*
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_anydesk.sh)"
+```
+*⚠️ **Nota de seguridad**: macOS **no permite** que ningún script active esos permisos por ti (protección TCC/SIP). El script te deja los paneles abiertos; el interruptor lo activas tú a mano. Cualquier "instalador" que afirme otorgarlos solo, miente o te pide bajar la seguridad del sistema.*
+
 ---
 
 ## 🔍 Solución Rápida de Problemas (Troubleshooting Headless / SSH)
@@ -145,6 +152,7 @@ Los scripts envuelven al instalador oficial (heredando su checksum e idempotenci
 | `scripts/install_macos_brew.sh` | macOS | **Completo**: Instala Homebrew + Node@20 + Python 3.12 + Herramientas CLI + Plugins Zsh + CLIs de IA (Gemini, Claude, Qwen, Codex) + `agy` + defaults de macOS |
 | `scripts/optimizar_equipo.sh` | macOS | **Mantenimiento**: Optimizador metodológico de disco y RAM con Premortem Gate en vivo y reporte de gigabytes recuperados |
 | `scripts/install_skills.sh` | Linux / macOS | **Opcional**: Instala Node (NVM) para el catálogo de skills en Linux |
+| `scripts/install_anydesk.sh` | macOS | **Asistencia remota**: Instala AnyDesk (brew o `.dmg`) + abre los paneles de permisos (Grabación de pantalla, Accesibilidad) para activarlos con 1 clic. También habilita compartir pantalla en Google Meet |
 
 ```bash
 # macOS (Instalación Completa de Entorno, Herramientas CLI y Defaults)
