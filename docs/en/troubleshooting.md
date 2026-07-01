@@ -88,6 +88,21 @@ Remove-Item "$env:LOCALAPPDATA\agy\bin\agy.exe" -Force   # Windows (PowerShell)
 The official installer detects musl automatically. If you downloaded it by hand, make sure
 to use the `linux_<arch>_musl` variant. More detail in the [Technical manual](manuales/tecnico.md).
 
+## macOS: allow screen recording for remote assistance (Google Meet)
+
+If you're going to receive remote support over **Google Meet** and need to **share your
+screen**, macOS requires you to explicitly authorize your browser to record the screen.
+
+!!! note "For macOS Ventura and later (macOS 13+)"
+    1. Click the **Apple** menu (the apple icon in the top-left corner).
+    2. Select **System Settings**.
+    3. In the left sidebar, click **Privacy & Security**.
+    4. Scroll down in the right pane and select **Screen Recording**.
+    5. Find the browser you use for Google Meet in the list (for example, **Google Chrome**).
+    6. Turn on the switch next to that browser.
+    7. The system may ask you to enter your Mac password or use **Touch ID** to confirm the change.
+    8. A message will appear saying the browser can't record the screen until it's restarted. Click **Quit & Reopen**.
+
 ---
 
 Your case isn't here? Open an *issue* on

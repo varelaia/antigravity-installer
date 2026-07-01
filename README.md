@@ -102,6 +102,24 @@ En servidores headless de Linux, no hay un llavero de seguridad activo (`keyring
 
 ---
 
+## 🖥️ Asistencia remota (permitir grabación de pantalla)
+
+Si vas a recibir soporte remoto por **Google Meet** y necesitas **compartir tu pantalla**,
+macOS exige que autorices explícitamente a tu navegador a grabar la pantalla.
+
+### Para macOS Ventura y versiones posteriores (macOS 13+)
+
+1. Haz clic en el menú **Apple** (el ícono de la manzana en la esquina superior izquierda).
+2. Selecciona **Configuración del Sistema** (*System Settings*).
+3. En el menú lateral izquierdo, haz clic en **Privacidad y seguridad** (*Privacy & Security*).
+4. Desplázate hacia abajo en el panel derecho y selecciona **Grabación de pantalla** (*Screen Recording*).
+5. Busca en la lista el navegador que usas para Google Meet (por ejemplo, **Google Chrome**).
+6. Activa el interruptor junto a ese navegador.
+7. Es posible que el sistema te pida ingresar la contraseña de tu Mac o usar **Touch ID** para confirmar el cambio.
+8. Aparecerá un mensaje indicando que el navegador no podrá grabar la pantalla hasta que se reinicie. Haz clic en **Salir y volver a abrir** (*Quit & Reopen*).
+
+---
+
 ## 🛠️ Scripts de este repo (wrappers con persistencia de PATH)
 
 Los scripts envuelven al instalador oficial (heredando su checksum e idempotencia) y añaden lo único que el oficial no hace: **persistir el PATH**, instalar dependencias y verificar el resultado.
