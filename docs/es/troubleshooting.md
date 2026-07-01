@@ -155,6 +155,29 @@ macOS exige que autorices explícitamente a tu navegador a grabar la pantalla.
     7. Es posible que el sistema te pida ingresar la contraseña de tu Mac o usar **Touch ID** para confirmar el cambio.
     8. Aparecerá un mensaje indicando que el navegador no podrá grabar la pantalla hasta que se reinicie. Haz clic en **Salir y volver a abrir** (*Quit & Reopen*).
 
+## macOS: asistencia remota con AnyDesk (1 comando)
+
+Si `agy` no puede correr en el Mac (por ejemplo, en **macOS 11** — ver la sección del crash
+más arriba) o simplemente necesitas que alguien te asista viendo tu pantalla, **AnyDesk** sí
+funciona en **macOS 11+**. Este repo trae un script que lo instala y te abre los paneles de
+permisos:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_anydesk.sh)"
+```
+
+El script instala AnyDesk (Homebrew si existe, si no el `.dmg` oficial), lo lanza y **abre**
+los paneles de **Grabación de pantalla** y **Accesibilidad**.
+
+!!! warning "macOS no deja que un script otorgue estos permisos — es por diseño (TCC/SIP)"
+    Los permisos de **Grabación de pantalla** y **Accesibilidad** solo los activa el usuario
+    a mano. El script te **abre** el panel exacto; tú das **1 clic** por permiso: activa
+    **AnyDesk**, y también tu **navegador** (Chrome/Safari) si vas a compartir pantalla en
+    Google Meet. Ningún instalador puede palomearlos solo sin MDM corporativo ni desactivar
+    SIP — cualquiera que diga lo contrario, miente o te pide bajar la seguridad del sistema.
+
+    Al terminar, dale a quien te asiste tu **número de 9 dígitos** de AnyDesk.
+
 ---
 
 ¿Tu caso no está aquí? Abre un *issue* en

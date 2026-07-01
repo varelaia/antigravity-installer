@@ -155,6 +155,28 @@ screen**, macOS requires you to explicitly authorize your browser to record the 
     7. The system may ask you to enter your Mac password or use **Touch ID** to confirm the change.
     8. A message will appear saying the browser can't record the screen until it's restarted. Click **Quit & Reopen**.
 
+## macOS: remote assistance with AnyDesk (1 command)
+
+If `agy` can't run on the Mac (for example, on **macOS 11** — see the crash section above) or
+you simply need someone to assist you by viewing your screen, **AnyDesk** does work on
+**macOS 11+**. This repo ships a script that installs it and opens the permission panes for you:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/varelaia/antigravity-installer/main/scripts/install_anydesk.sh)"
+```
+
+The script installs AnyDesk (Homebrew if present, else the official `.dmg`), launches it, and
+**opens** the **Screen Recording** and **Accessibility** panes.
+
+!!! warning "macOS won't let a script grant these permissions — by design (TCC/SIP)"
+    **Screen Recording** and **Accessibility** permissions can only be enabled by the user, by
+    hand. The script **opens** the exact pane; you give **one click** per permission: enable
+    **AnyDesk**, and also your **browser** (Chrome/Safari) if you're going to share your screen
+    in Google Meet. No installer can flip them for you without corporate MDM or disabling SIP —
+    anyone claiming otherwise is lying or asking you to lower your system's security.
+
+    When done, give whoever assists you your AnyDesk **9-digit number**.
+
 ---
 
 Your case isn't here? Open an *issue* on
