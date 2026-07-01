@@ -29,6 +29,25 @@ El binario se instaló pero no está en tu `PATH`, o la terminal aún no recarg�
     Un script no puede cambiar el `PATH` de la terminal que lo invocó. Siempre necesitas
     una **terminal nueva** o `source` tras instalar.
 
+!!! warning "macOS: el instalador oficial dice `~/.bashrc`, pero macOS usa `zsh`"
+    El instalador oficial de Google (`curl … | bash`) corre bajo `bash` y sugiere añadir el
+    PATH a `~/.bashrc`. Pero desde macOS Catalina el shell por defecto es **`zsh`**, que **no
+    lee `~/.bashrc`** → el binario queda instalado en `~/.local/bin/agy` pero ninguna terminal
+    nueva lo encuentra. La solución es usar **`~/.zshrc`**:
+
+    ```bash
+    # 1) Verifica tu shell (en macOS suele ser /bin/zsh):
+    echo $SHELL
+    # 2) Confirma que el binario ejecuta por ruta absoluta:
+    ~/.local/bin/agy --version
+    # 3) Añade el PATH al archivo correcto de zsh y recarga:
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
+    ```
+
+    No hace falta borrar la línea que quedó en `~/.bashrc`; es inofensiva. Nuestro wrapper
+    `scripts/install_antigravity.sh` ya detecta el shell y escribe en el archivo correcto.
+
 ## `agy --version` no imprime nada
 
 Casi siempre es el mismo problema de PATH: estás invocando un `agy` que no existe en esta
