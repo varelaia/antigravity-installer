@@ -24,17 +24,17 @@ El desarrollo y despliegue de agentes autónomos en entornos locales presenta tr
 
 ## ⚡ Instalación rápida (one-liner oficial)
 
-=== "Linux / macOS"
+**Linux / macOS**
 
-    ```bash
-    curl -fsSL https://antigravity.google/cli/install.sh | bash
-    ```
+```
+curl -fsSL https://antigravity.google/cli/install.sh | bash
+```
 
-=== "Windows (PowerShell)"
+**Windows (PowerShell)**
 
-    ```powershell
-    irm https://antigravity.google/cli/install.ps1 | iex
-    ```
+```
+irm https://antigravity.google/cli/install.ps1 | iex
+```
 
 Tras instalar, abre una terminal nueva y verifica:
 
